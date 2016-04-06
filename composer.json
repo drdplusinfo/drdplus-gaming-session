@@ -10,13 +10,13 @@
   },
   "require": {
     "php": ">=5.5.0",
-    "doctrine/orm": "*",
     "doctrineum/integer": "dev-master",
     "drd-plus/tables": "dev-master"
   },
   "require-dev": {
     "phpunit/phpunit": "~4.4",
-    "mockery/mockery": "dev-master"
+    "mockery/mockery": "dev-master",
+    "doctrine/orm": "2.*"
   },
   "minimum-stability": "dev",
   "prefer-stable": true

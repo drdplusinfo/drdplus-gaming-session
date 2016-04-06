@@ -11,7 +11,8 @@ class GamingSessionCategoryExperiencesTypeTest extends \PHPUnit_Framework_TestCa
      */
     public function I_can_register_it()
     {
-        self::assertTrue(GamingSessionCategoryExperiencesType::registerSelf());
+        GamingSessionCategoryExperiencesType::registerSelf();
+
         self::assertTrue(Type::hasType(GamingSessionCategoryExperiencesType::getTypeName()));
         self::assertTrue(GamingSessionCategoryExperiencesType::isRegistered());
         self::assertInstanceOf(

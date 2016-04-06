@@ -7,6 +7,9 @@ use Granam\Scalar\Tools\ToString;
 use Granam\Strict\Object\StrictObject;
 use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * @ORM\Entity()
+ */
 class GamingSession extends StrictObject
 {
     /**
@@ -18,27 +21,27 @@ class GamingSession extends StrictObject
     private $id;
     /**
      * @var GamingSessionCategoryExperiences
-     * @ORM\Column(type="gaming_session")
+     * @ORM\Column(type="gaming_session_category_experiences")
      */
     private $rolePlayingExperiences;
     /**
      * @var GamingSessionCategoryExperiences
-     * @ORM\Column(type="gaming_session")
+     * @ORM\Column(type="gaming_session_category_experiences")
      */
     private $difficultiesSolvingExperiences;
     /**
      * @var GamingSessionCategoryExperiences
-     * @ORM\Column(type="gaming_session")
+     * @ORM\Column(type="gaming_session_category_experiences")
      */
     private $abilityUsageExperiences;
     /**
      * @var GamingSessionCategoryExperiences
-     * @ORM\Column(type="gaming_session")
+     * @ORM\Column(type="gaming_session_category_experiences")
      */
     private $companionsHelpingExperiences;
     /**
      * @var GamingSessionCategoryExperiences
-     * @ORM\Column(type="gaming_session")
+     * @ORM\Column(type="gaming_session_category_experiences")
      */
     private $gameContributingExperiences;
     /**
