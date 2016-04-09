@@ -1,6 +1,7 @@
 <?php
 namespace DrdPlus\Tests\Person\GamingSession;
 
+use DrdPlus\Person\GamingSession\Adventure;
 use DrdPlus\Person\GamingSession\GamingSession;
 use DrdPlus\Person\GamingSession\GamingSessionCategoryExperiences;
 use DrdPlus\Tables\Measurements\Experiences\Experiences;
@@ -15,6 +16,7 @@ class GamingSessionTest extends TestWithMockery
     public function I_can_use_it()
     {
         $gamingSession = new GamingSession(
+            $adventure = $this->createAdventure(),
             $rolePLayingExperiences = $this->createGamingSessionCategoryExperiences(1),
             $difficultiesSolvingExperiences = $this->createGamingSessionCategoryExperiences(2),
             $abilityUsageExperiences = $this->createGamingSessionCategoryExperiences(3),
@@ -23,6 +25,7 @@ class GamingSessionTest extends TestWithMockery
             $sessionName = 'foo'
         );
         self::assertNull($gamingSession->getId());
+        self::assertSame($adventure, $gamingSession->getAdventure());
         self::assertSame($rolePLayingExperiences, $gamingSession->getRolePlayingExperiences());
         self::assertSame($difficultiesSolvingExperiences, $gamingSession->getDifficultiesSolvingExperiences());
         self::assertSame($abilityUsageExperiences, $gamingSession->getAbilityUsageExperiences());
@@ -38,6 +41,14 @@ class GamingSessionTest extends TestWithMockery
             + $gameContributingExperiences->getValue(),
             $experiences->getValue()
         );
+    }
+
+    /**
+     * @return \Mockery\MockInterface|Adventure
+     */
+    private function createAdventure()
+    {
+        return $this->mockery(Adventure::class);
     }
 
     /**

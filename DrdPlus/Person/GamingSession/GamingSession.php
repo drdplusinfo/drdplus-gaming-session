@@ -1,6 +1,7 @@
 <?php
 namespace DrdPlus\Person\GamingSession;
 
+use Doctrineum\Entity\Entity;
 use DrdPlus\Tables\Measurements\Experiences\Experiences;
 use DrdPlus\Tables\Measurements\Experiences\ExperiencesTable;
 use Granam\Scalar\Tools\ToString;
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity()
  */
-class GamingSession extends StrictObject
+class GamingSession extends StrictObject implements Entity
 {
     /**
      * @var int
@@ -50,11 +51,18 @@ class GamingSession extends StrictObject
      */
     private $sessionName;
     /**
+     * @var Adventure
+     * @ORM\ManyToOne(targetEntity="Adventure", inversedBy="gamingSessions", cascade={"persist"})
+     */
+    private $adventure;
+    /**
+     * On-demand built enum
      * @var Experiences
      */
     private $experiences;
 
     /**
+     * @param Adventure $adventure
      * @param GamingSessionCategoryExperiences $rolePlayingExperiences
      * @param GamingSessionCategoryExperiences $difficultiesSolvingExperiences
      * @param GamingSessionCategoryExperiences $abilityUsageExperiences
@@ -64,6 +72,7 @@ class GamingSession extends StrictObject
      * @param string $sessionName
      */
     public function __construct(
+        Adventure $adventure,
         GamingSessionCategoryExperiences $rolePlayingExperiences,
         GamingSessionCategoryExperiences $difficultiesSolvingExperiences,
         GamingSessionCategoryExperiences $abilityUsageExperiences,
@@ -72,6 +81,7 @@ class GamingSession extends StrictObject
         $sessionName
     )
     {
+        $this->adventure = $adventure;
         $this->rolePlayingExperiences = $rolePlayingExperiences;
         $this->difficultiesSolvingExperiences = $difficultiesSolvingExperiences;
         $this->abilityUsageExperiences = $abilityUsageExperiences;
@@ -87,6 +97,14 @@ class GamingSession extends StrictObject
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return Adventure
+     */
+    public function getAdventure()
+    {
+        return $this->adventure;
     }
 
     /**

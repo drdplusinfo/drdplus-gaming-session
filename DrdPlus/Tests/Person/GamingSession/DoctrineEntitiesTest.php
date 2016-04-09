@@ -1,8 +1,8 @@
 <?php
 namespace DrdPlus\Tests\Person\GamingSession;
 
-use Doctrine\ORM\EntityManager;
 use Doctrineum\Tests\Entity\AbstractDoctrineEntitiesTest;
+use DrdPlus\Person\GamingSession\Adventure;
 use DrdPlus\Person\GamingSession\EnumTypes\GamingSessionCategoryExperiencesType;
 use DrdPlus\Person\GamingSession\GamingSession;
 use DrdPlus\Person\GamingSession\GamingSessionCategoryExperiences;
@@ -27,7 +27,8 @@ class DoctrineEntitiesTest extends AbstractDoctrineEntitiesTest
     protected function getExpectedEntityClasses()
     {
         return [
-            GamingSession::class,
+            Adventure::class,
+            GamingSession::class
         ];
     }
 
@@ -35,25 +36,16 @@ class DoctrineEntitiesTest extends AbstractDoctrineEntitiesTest
     {
         return [
             new GamingSession(
+                new Adventure('foo'),
                 GamingSessionCategoryExperiences::getIt(0),
                 GamingSessionCategoryExperiences::getIt(1),
                 GamingSessionCategoryExperiences::getIt(2),
                 GamingSessionCategoryExperiences::getIt(3),
                 GamingSessionCategoryExperiences::getIt(2),
-                'foo'
-            )
+                'bar'
+            ),
+            new Adventure('baz'),
         ];
-    }
-
-    protected function fetchEntitiesByOriginals(array $originalEntities, EntityManager $entityManager)
-    {
-        $fetched = [];
-        foreach ($originalEntities as $originalEntity) {
-            /** @var GamingSession $originalEntity */
-            $fetched[] = $entityManager->getRepository(GamingSession::class)->find($originalEntity->getId());
-        }
-
-        return $fetched;
     }
 
 }
