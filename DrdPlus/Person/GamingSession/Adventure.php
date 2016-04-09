@@ -1,6 +1,7 @@
 <?php
 namespace DrdPlus\Person\GamingSession;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrineum\Entity\Entity;
@@ -24,7 +25,7 @@ class Adventure extends StrictObject implements Entity
      * Is filled by Doctrine on GaminSession database persistence,
      * @see \DrdPlus\Person\GamingSession\GamingSession::__construct for linking
      *
-     * @var GamingSession[]|null
+     * @var GamingSession[]
      * @ORM\OneToMany(targetEntity="GamingSession", mappedBy="adventure")
      */
     private $gamingSessions;
@@ -38,6 +39,7 @@ class Adventure extends StrictObject implements Entity
     public function __construct($name)
     {
         $this->name = ToString::toString($name);
+        $this->gamingSessions = new ArrayCollection();
     }
 
     public function __toString()
@@ -46,7 +48,7 @@ class Adventure extends StrictObject implements Entity
     }
 
     /**
-     * @return GamingSession[]|Collection|null
+     * @return GamingSession[]|Collection
      */
     public function getGamingSessions()
     {

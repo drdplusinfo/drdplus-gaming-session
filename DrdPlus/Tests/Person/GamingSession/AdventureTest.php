@@ -14,6 +14,6 @@ class AdventureTest extends \PHPUnit_Framework_TestCase
         self::assertSame($name, $adventure->getName());
         self::assertSame($name, (string)$adventure);
         self::assertNull($adventure->getId());
-        self::assertNull($adventure->getGamingSessions());
+        self::assertCount(0, $adventure->getGamingSessions());
     }
 }
