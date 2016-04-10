@@ -46,34 +46,34 @@ class AdventureTest extends TestWithMockery
         $adventure = new Adventure($this->createMemories(), 'foo');
         $experienceValues = [];
 
-        $gamingSession = $adventure->createGamingSession(
+        $firstGamingSession = $adventure->createGamingSession(
             $rolePlayingExperiences = $this->createGamingSessionCategoryExperiences($experienceValues[] = 1),
             $difficultiesSolvingExperiences = $this->createGamingSessionCategoryExperiences($experienceValues[] = 2),
             $abilityUsageExperiences = $this->createGamingSessionCategoryExperiences($experienceValues[] = 3),
             $companionsHelpingExperiences = $this->createGamingSessionCategoryExperiences($experienceValues[] = 4),
             $gameContributingExperiences = $this->createGamingSessionCategoryExperiences($experienceValues[] = 5),
-            $gamingSessionName = 'bar'
+            $firstGamingSessionName = 'bar'
         );
-        self::assertInstanceOf(GamingSession::class, $gamingSession);
+        self::assertInstanceOf(GamingSession::class, $firstGamingSession);
         $experiencesTable = (new Tables())->getExperiencesTable();
         self::assertInstanceOf(Experiences::class, $experiences = $adventure->getExperiences($experiencesTable));
         self::assertSame(array_sum($experienceValues), $experiences->getValue());
-        self::assertSame($gamingSessionName, $gamingSession->getSessionName());
-        self::assertSame($rolePlayingExperiences, $gamingSession->getRolePlayingExperiences());
-        self::assertSame($difficultiesSolvingExperiences, $gamingSession->getDifficultiesSolvingExperiences());
-        self::assertSame($abilityUsageExperiences, $gamingSession->getAbilityUsageExperiences());
-        self::assertSame($companionsHelpingExperiences, $gamingSession->getCompanionsHelpingExperiences());
-        self::assertSame($gameContributingExperiences, $gamingSession->getGameContributingExperiences());
+        self::assertSame($firstGamingSessionName, $firstGamingSession->getSessionName());
+        self::assertSame($rolePlayingExperiences, $firstGamingSession->getRolePlayingExperiences());
+        self::assertSame($difficultiesSolvingExperiences, $firstGamingSession->getDifficultiesSolvingExperiences());
+        self::assertSame($abilityUsageExperiences, $firstGamingSession->getAbilityUsageExperiences());
+        self::assertSame($companionsHelpingExperiences, $firstGamingSession->getCompanionsHelpingExperiences());
+        self::assertSame($gameContributingExperiences, $firstGamingSession->getGameContributingExperiences());
 
-        $anotherGamingSession = $adventure->createGamingSession(
+        $secondGamingSession = $adventure->createGamingSession(
             $rolePlayingExperiences = $this->createGamingSessionCategoryExperiences($experienceValues[] = 6),
             $difficultiesSolvingExperiences = $this->createGamingSessionCategoryExperiences($experienceValues[] = 7),
             $abilityUsageExperiences = $this->createGamingSessionCategoryExperiences($experienceValues[] = 8),
             $companionsHelpingExperiences = $this->createGamingSessionCategoryExperiences($experienceValues[] = 9),
             $gameContributingExperiences = $this->createGamingSessionCategoryExperiences($experienceValues[] = 10),
-            $anotherGamingSessionName = 'baz'
+            $secondGamingSessionName = 'baz'
         );
-        self::assertInstanceOf(GamingSession::class, $anotherGamingSession);
+        self::assertInstanceOf(GamingSession::class, $secondGamingSession);
         self::assertInstanceOf(Experiences::class, $newExperiences = $adventure->getExperiences($experiencesTable));
         self::assertNotEquals($experiences, $newExperiences);
         self::assertSame(
@@ -81,12 +81,18 @@ class AdventureTest extends TestWithMockery
             $newExperiences->getValue(),
             'Experiences should be always recalculated to catch new gaming session anytime'
         );
-        self::assertSame($anotherGamingSessionName, $anotherGamingSession->getSessionName());
-        self::assertSame($rolePlayingExperiences, $anotherGamingSession->getRolePlayingExperiences());
-        self::assertSame($difficultiesSolvingExperiences, $anotherGamingSession->getDifficultiesSolvingExperiences());
-        self::assertSame($abilityUsageExperiences, $anotherGamingSession->getAbilityUsageExperiences());
-        self::assertSame($companionsHelpingExperiences, $anotherGamingSession->getCompanionsHelpingExperiences());
-        self::assertSame($gameContributingExperiences, $anotherGamingSession->getGameContributingExperiences());
+        self::assertSame($secondGamingSessionName, $secondGamingSession->getSessionName());
+        self::assertSame($rolePlayingExperiences, $secondGamingSession->getRolePlayingExperiences());
+        self::assertSame($difficultiesSolvingExperiences, $secondGamingSession->getDifficultiesSolvingExperiences());
+        self::assertSame($abilityUsageExperiences, $secondGamingSession->getAbilityUsageExperiences());
+        self::assertSame($companionsHelpingExperiences, $secondGamingSession->getCompanionsHelpingExperiences());
+        self::assertSame($gameContributingExperiences, $secondGamingSession->getGameContributingExperiences());
+        self::assertCount(2, $adventure);
+        $collectedGamingSessions = [];
+        foreach ($adventure as $gamingSessionToCollect) {
+            $collectedGamingSessions[] = $gamingSessionToCollect;
+        }
+        self::assertSame([$firstGamingSession, $secondGamingSession], $collectedGamingSessions);
     }
 
     /**

@@ -16,9 +16,9 @@ class MemoriesTest extends TestWithMockery
         $memories = new Memories();
 
         $firstAdventureExperienceValues = [];
-        $firstAdventure = $memories->createAdventure($adventureName = 'foo');
+        $firstAdventure = $memories->createAdventure($firstAdventureName = 'foo');
         self::assertInstanceOf(Adventure::class, $firstAdventure);
-        self::assertSame($adventureName, $firstAdventure->getName());
+        self::assertSame($firstAdventureName, $firstAdventure->getName());
         $firstAdventure->createGamingSession(
             $this->createGamingSessionCategoryExperiences($firstAdventureExperienceValues[] = 1),
             $this->createGamingSessionCategoryExperiences($firstAdventureExperienceValues[] = 2),
@@ -29,7 +29,8 @@ class MemoriesTest extends TestWithMockery
         );
 
         $secondAdventureExperienceValue = [];
-        $secondAdventure = $memories->createAdventure('bar');
+        $secondAdventure = $memories->createAdventure($secondAdventureName = 'bar');
+        self::assertSame($secondAdventureName, $secondAdventure->getName());
         $secondAdventure->createGamingSession(
             $this->createGamingSessionCategoryExperiences($secondAdventureExperienceValue[] = 6),
             $this->createGamingSessionCategoryExperiences($secondAdventureExperienceValue[] = 7),
@@ -45,6 +46,12 @@ class MemoriesTest extends TestWithMockery
             array_sum($firstAdventureExperienceValues) + array_sum($secondAdventureExperienceValue),
             $totalExperiences->getValue()
         );
+        self::assertCount(2, $memories);
+        $collectedAdventures = [];
+        foreach ($memories as $adventureToCollect) {
+            $collectedAdventures[] = $adventureToCollect;
+        }
+        self::assertSame([$firstAdventure, $secondAdventure], $collectedAdventures);
     }
 
     /**

@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity()
  */
-class GamingSession extends StrictObject implements Entity
+class GamingSession extends StrictObject implements Entity, \IteratorAggregate
 {
     /**
      * @var int
@@ -80,7 +80,6 @@ class GamingSession extends StrictObject implements Entity
         $this->rolePlayingExperiences = $rolePlayingExperiences;
         $this->difficultiesSolvingExperiences = $difficultiesSolvingExperiences;
         $this->abilityUsageExperiences = $abilityUsageExperiences;
-        $this->companionsHelpingExperiences = $companionsHelpingExperiences;
         $this->companionsHelpingExperiences = $companionsHelpingExperiences;
         $this->gameContributingExperiences = $gameContributingExperiences;
         $this->sessionName = ToString::toString($sessionName);
@@ -174,4 +173,16 @@ class GamingSession extends StrictObject implements Entity
     {
         return $this->sessionName;
     }
+
+    public function getIterator()
+    {
+        return new \ArrayIterator([
+            $this->getRolePlayingExperiences(),
+            $this->getDifficultiesSolvingExperiences(),
+            $this->getAbilityUsageExperiences(),
+            $this->getCompanionsHelpingExperiences(),
+            $this->getGameContributingExperiences()
+        ]);
+    }
+
 }

@@ -15,18 +15,19 @@ class GamingSessionTest extends TestWithMockery
      */
     public function I_can_use_it()
     {
+        $categorizedExperiences = [];
         $gamingSession = new GamingSession(
             $adventure = $this->createAdventure(),
-            $rolePLayingExperiences = $this->createGamingSessionCategoryExperiences(1),
-            $difficultiesSolvingExperiences = $this->createGamingSessionCategoryExperiences(2),
-            $abilityUsageExperiences = $this->createGamingSessionCategoryExperiences(3),
-            $companionsHelpingExperiences = $this->createGamingSessionCategoryExperiences(0),
-            $gameContributingExperiences = $this->createGamingSessionCategoryExperiences(1),
+            $categorizedExperiences[] = $rolePlayingExperiences = $this->createGamingSessionCategoryExperiences($experienceValues[] = 1),
+            $categorizedExperiences[] = $difficultiesSolvingExperiences = $this->createGamingSessionCategoryExperiences($experienceValues[] = 2),
+            $categorizedExperiences[] = $abilityUsageExperiences = $this->createGamingSessionCategoryExperiences($experienceValues[] = 3),
+            $categorizedExperiences[] = $companionsHelpingExperiences = $this->createGamingSessionCategoryExperiences($experienceValues[] = 4),
+            $categorizedExperiences[] = $gameContributingExperiences = $this->createGamingSessionCategoryExperiences($experienceValues[] = 5),
             $sessionName = 'foo'
         );
         self::assertNull($gamingSession->getId());
         self::assertSame($adventure, $gamingSession->getAdventure());
-        self::assertSame($rolePLayingExperiences, $gamingSession->getRolePlayingExperiences());
+        self::assertSame($rolePlayingExperiences, $gamingSession->getRolePlayingExperiences());
         self::assertSame($difficultiesSolvingExperiences, $gamingSession->getDifficultiesSolvingExperiences());
         self::assertSame($abilityUsageExperiences, $gamingSession->getAbilityUsageExperiences());
         self::assertSame($companionsHelpingExperiences, $gamingSession->getCompanionsHelpingExperiences());
@@ -39,11 +40,17 @@ class GamingSessionTest extends TestWithMockery
         self::assertEquals($experiences, $sameExperiencesNewInstance);
         self::assertNotSame($experiences, $sameExperiencesNewInstance);
 
-        self::assertSame($rolePLayingExperiences->getValue() + $difficultiesSolvingExperiences->getValue()
+        self::assertSame($rolePlayingExperiences->getValue() + $difficultiesSolvingExperiences->getValue()
             + $abilityUsageExperiences->getValue() + $companionsHelpingExperiences->getValue()
             + $gameContributingExperiences->getValue(),
             $experiences->getValue()
         );
+        $collectedCategorizedExperiences = [];
+        foreach ($gamingSession as $categorizedExperienceToBeCollected) {
+            $collectedCategorizedExperiences[] = $categorizedExperienceToBeCollected;
+        }
+
+        self::assertSame($categorizedExperiences, $collectedCategorizedExperiences);
     }
 
     /**

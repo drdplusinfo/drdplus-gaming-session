@@ -12,7 +12,7 @@ use Granam\Strict\Object\StrictObject;
 /**
  * @ORM\Entity()
  */
-class Memories extends StrictObject implements Entity
+class Memories extends StrictObject implements Entity, \IteratorAggregate, \Countable
 {
     /**
      * @var int
@@ -76,6 +76,16 @@ class Memories extends StrictObject implements Entity
         }
 
         return new Experiences($experiencesSum, $experiencesTable);
+    }
+
+    public function getIterator()
+    {
+        return $this->getAdventures()->getIterator();
+    }
+
+    public function count()
+    {
+        return $this->getAdventures()->count();
     }
 
 }

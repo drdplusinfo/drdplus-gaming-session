@@ -9,11 +9,12 @@ use DrdPlus\Tables\Measurements\Experiences\Experiences;
 use DrdPlus\Tables\Measurements\Experiences\ExperiencesTable;
 use Granam\Scalar\Tools\ToString;
 use Granam\Strict\Object\StrictObject;
+use Traversable;
 
 /**
  * @ORM\Entity()
  */
-class Adventure extends StrictObject implements Entity
+class Adventure extends StrictObject implements Entity, \IteratorAggregate, \Countable
 {
     /**
      * @var int
@@ -117,6 +118,10 @@ class Adventure extends StrictObject implements Entity
         return $this->gamingSessions;
     }
 
+    /**
+     * @param ExperiencesTable $experiencesTable
+     * @return Experiences
+     */
     public function getExperiences(ExperiencesTable $experiencesTable)
     {
         $experiencesSum = 0;
@@ -125,6 +130,22 @@ class Adventure extends StrictObject implements Entity
         }
 
         return new Experiences($experiencesSum, $experiencesTable);
+    }
+
+    /**
+     * @return Traversable
+     */
+    public function getIterator()
+    {
+        return $this->getGamingSessions()->getIterator();
+    }
+
+    /**
+     * @return int
+     */
+    public function count()
+    {
+        return $this->getGamingSessions()->count();
     }
 
 }
