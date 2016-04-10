@@ -5,6 +5,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrineum\Entity\Entity;
+use DrdPlus\Tables\Measurements\Experiences\Experiences;
+use DrdPlus\Tables\Measurements\Experiences\ExperiencesTable;
 use Granam\Strict\Object\StrictObject;
 
 /**
@@ -50,12 +52,30 @@ class Memories extends StrictObject implements Entity
         return $this->adventures;
     }
 
+    /**
+     * @param string $name
+     * @return Adventure
+     */
     public function createAdventure($name)
     {
         $adventure = new Adventure($this, $name);
         $this->getAdventures()->add($adventure);
 
         return $adventure;
+    }
+
+    /**
+     * @param ExperiencesTable $experiencesTable
+     * @return Experiences
+     */
+    public function getExperiences(ExperiencesTable $experiencesTable)
+    {
+        $experiencesSum = 0;
+        foreach ($this->getAdventures() as $adventure) {
+            $experiencesSum += $adventure->getExperiences($experiencesTable)->getValue();
+        }
+
+        return new Experiences($experiencesSum, $experiencesTable);
     }
 
 }
