@@ -22,9 +22,18 @@ class Adventure extends StrictObject implements Entity
      * @ORM\GeneratedValue
      */
     private $id;
-
     /**
-     * Is filled by Doctrine on GaminSession database persistence,
+     * @var Memories
+     * @ORM\ManyToOne(targetEntity="Memories", inversedBy="adventures", cascade={"persist"})
+     */
+    private $memories;
+    /**
+     * @var string
+     * @ORM\Column(type="string", unique=true)
+     */
+    private $name;
+    /**
+     * Can be also filled by Doctrine on GaminSession database persistence,
      * @see \DrdPlus\Person\GamingSession\GamingSession::__construct for linking
      *
      * @var GamingSession[]
@@ -32,14 +41,9 @@ class Adventure extends StrictObject implements Entity
      */
     private $gamingSessions;
 
-    /**
-     * @var string
-     * @ORM\Column(type="string", unique=true)
-     */
-    private $name;
-
-    public function __construct($name)
+    public function __construct(Memories $memories, $name)
     {
+        $this->memories = $memories;
         $this->name = ToString::toString($name);
         $this->gamingSessions = new ArrayCollection();
     }
@@ -47,6 +51,30 @@ class Adventure extends StrictObject implements Entity
     public function __toString()
     {
         return $this->getName();
+    }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return Memories
+     */
+    public function getMemories()
+    {
+        return $this->memories;
     }
 
     /**
@@ -87,22 +115,6 @@ class Adventure extends StrictObject implements Entity
     public function getGamingSessions()
     {
         return $this->gamingSessions;
-    }
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
     }
 
     public function getExperiences(ExperiencesTable $experiencesTable)

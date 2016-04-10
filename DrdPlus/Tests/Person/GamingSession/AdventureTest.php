@@ -4,6 +4,7 @@ namespace DrdPlus\Tests\Person\GamingSession;
 use DrdPlus\Person\GamingSession\Adventure;
 use DrdPlus\Person\GamingSession\GamingSession;
 use DrdPlus\Person\GamingSession\GamingSessionCategoryExperiences;
+use DrdPlus\Person\GamingSession\Memories;
 use DrdPlus\Tables\Measurements\Experiences\Experiences;
 use DrdPlus\Tables\Tables;
 use Granam\Tests\Tools\TestWithMockery;
@@ -15,7 +16,11 @@ class AdventureTest extends TestWithMockery
      */
     public function I_can_use_it_as_new()
     {
-        $adventure = new Adventure($name = 'foo');
+        $adventure = new Adventure(
+            $memories = $this->createMemories(),
+            $name = 'foo'
+        );
+        self::assertSame($memories, $adventure->getMemories());
         self::assertSame($name, $adventure->getName());
         self::assertSame($name, (string)$adventure);
         self::assertNull($adventure->getId());
@@ -26,11 +31,19 @@ class AdventureTest extends TestWithMockery
     }
 
     /**
+     * @return \Mockery\MockInterface|Memories
+     */
+    private function createMemories()
+    {
+        return $this->mockery(Memories::class);
+    }
+
+    /**
      * @test
      */
     public function I_can_add_gaming_session()
     {
-        $adventure = new Adventure($name = 'foo');
+        $adventure = new Adventure($this->createMemories(), 'foo');
         $experienceValues = [];
 
         $gamingSession = $adventure->createGamingSession(
