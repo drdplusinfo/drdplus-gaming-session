@@ -55,11 +55,6 @@ class GamingSession extends StrictObject implements Entity
      * @ORM\ManyToOne(targetEntity="Adventure", inversedBy="gamingSessions", cascade={"persist"})
      */
     private $adventure;
-    /**
-     * On-demand built enum
-     * @var Experiences
-     */
-    private $experiences;
 
     /**
      * @param Adventure $adventure
@@ -153,14 +148,10 @@ class GamingSession extends StrictObject implements Entity
      */
     public function getExperiences(ExperiencesTable $experiencesTable)
     {
-        if ($this->experiences === null) {
-            $this->experiences = new Experiences(
-                $this->sumExperiences(),
-                $experiencesTable
-            );
-        }
-
-        return $this->experiences;
+        return new Experiences(
+            $this->sumExperiences(),
+            $experiencesTable
+        );
     }
 
     /**

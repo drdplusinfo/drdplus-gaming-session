@@ -32,10 +32,13 @@ class GamingSessionTest extends TestWithMockery
         self::assertSame($companionsHelpingExperiences, $gamingSession->getCompanionsHelpingExperiences());
         self::assertSame($gameContributingExperiences, $gamingSession->getGameContributingExperiences());
         self::assertSame($sessionName, $gamingSession->getSessionName());
+
         $experiences = $gamingSession->getExperiences((new Tables())->getExperiencesTable());
         self::assertInstanceOf(Experiences::class, $experiences);
-        $sameExperiences = $gamingSession->getExperiences((new Tables())->getExperiencesTable());
-        self::assertSame($experiences, $sameExperiences);
+        $sameExperiencesNewInstance = $gamingSession->getExperiences((new Tables())->getExperiencesTable());
+        self::assertEquals($experiences, $sameExperiencesNewInstance);
+        self::assertNotSame($experiences, $sameExperiencesNewInstance);
+
         self::assertSame($rolePLayingExperiences->getValue() + $difficultiesSolvingExperiences->getValue()
             + $abilityUsageExperiences->getValue() + $companionsHelpingExperiences->getValue()
             + $gameContributingExperiences->getValue(),

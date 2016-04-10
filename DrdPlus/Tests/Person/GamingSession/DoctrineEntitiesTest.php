@@ -34,6 +34,16 @@ class DoctrineEntitiesTest extends AbstractDoctrineEntitiesTest
 
     protected function createEntitiesToPersist()
     {
+        $adventureWithGamingSession = new Adventure('gux');
+        $adventureWithGamingSession->createGamingSession(
+            GamingSessionCategoryExperiences::getIt(1),
+            GamingSessionCategoryExperiences::getIt(2),
+            GamingSessionCategoryExperiences::getIt(1),
+            GamingSessionCategoryExperiences::getIt(2),
+            GamingSessionCategoryExperiences::getIt(0),
+            'foobar'
+        );
+
         return [
             new GamingSession(
                 new Adventure('foo'),
@@ -45,6 +55,7 @@ class DoctrineEntitiesTest extends AbstractDoctrineEntitiesTest
                 'bar'
             ),
             new Adventure('baz'),
+            $adventureWithGamingSession
         ];
     }
 
