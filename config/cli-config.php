@@ -5,9 +5,7 @@ use Doctrine\ORM\Tools\Console\ConsoleRunner;
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
 
-$gamingSessionReflection = new \ReflectionClass(\DrdPlus\Person\GamingSession\GamingSession::class);
-$projectRootDir = dirname($gamingSessionReflection->getFileName());
-$paths = [$projectRootDir];
+$paths = [__DIR__ . '/../DrdPlus'];
 $config = Setup::createAnnotationMetadataConfiguration($paths, true /* dev mode */);
 $cache = new \Doctrine\Common\Cache\ArrayCache();
 $config->setMetadataCacheImpl($cache);
@@ -18,8 +16,6 @@ $driver = new \Doctrine\ORM\Mapping\Driver\AnnotationDriver(
 );
 $config->setMetadataDriverImpl($driver);
 
-$gamingSessionTestReflection = new \ReflectionClass(\DrdPlus\Tests\Person\GamingSession\GamingSessionTest::class);
-$testsRootDir = dirname($gamingSessionTestReflection->getFileName());
 $entityManager = EntityManager::create(
     [
         'driver' => 'pdo_sqlite',
@@ -28,5 +24,6 @@ $entityManager = EntityManager::create(
     $config
 );
 
+\DrdPlus\Person\GamingSession\EnumTypes\GamingSessionCategoryExperiencesType::registerSelf();
 
 return ConsoleRunner::createHelperSet($entityManager);
