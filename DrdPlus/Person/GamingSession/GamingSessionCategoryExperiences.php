@@ -5,8 +5,6 @@ use Doctrineum\Integer\IntegerEnum;
 
 class GamingSessionCategoryExperiences extends IntegerEnum
 {
-    const GAMING_SESSION_CATEGORY_EXPERIENCES = 'gaming_session_category_experiences';
-
     const MINIMUM_CATEGORY_EXPERIENCES = 0;
     const MAXIMUM_CATEGORY_EXPERIENCES = 3;
 

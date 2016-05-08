@@ -2,9 +2,16 @@
 namespace DrdPlus\Person\GamingSession\EnumTypes;
 
 use Doctrineum\Integer\IntegerEnumType;
-use DrdPlus\Person\GamingSession\GamingSessionCategoryExperiences;
 
 class GamingSessionCategoryExperiencesType extends IntegerEnumType
 {
-    const GAMING_SESSION_CATEGORY_EXPERIENCES = GamingSessionCategoryExperiences::GAMING_SESSION_CATEGORY_EXPERIENCES;
+    const GAMING_SESSION_CATEGORY_EXPERIENCES = 'gaming_session_category_experiences';
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return self::GAMING_SESSION_CATEGORY_EXPERIENCES;
+    }
 }

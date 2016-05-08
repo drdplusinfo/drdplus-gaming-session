@@ -13,7 +13,6 @@ class DoctrineEntitiesTest extends AbstractDoctrineEntitiesTest
     protected function setUp()
     {
         GamingSessionCategoryExperiencesType::registerSelf();
-        self::assertTrue(GamingSessionCategoryExperiencesType::isRegistered());
 
         parent::setUp();
     }

@@ -13,6 +13,6 @@ class GamingSessionEnumRegistrarTest extends \PHPUnit_Framework_TestCase
     public function I_can_register_all_enums_at_once()
     {
         GamingSessionEnumRegistrar::registerAll();
-        self::assertTrue(Type::hasType(GamingSessionCategoryExperiencesType::getTypeName()));
+        self::assertTrue(Type::hasType(GamingSessionCategoryExperiencesType::GAMING_SESSION_CATEGORY_EXPERIENCES));
     }
 }

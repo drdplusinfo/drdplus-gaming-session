@@ -1,23 +1,9 @@
 <?php
-namespace DrdPlus\Person\GamingSession\EnumTypes;
+namespace DrdPlus\Tests\Person\GamingSession\EnumTypes;
 
-use Doctrine\DBAL\Types\Type;
+use Doctrineum\Tests\SelfRegisteringType\AbstractSelfRegisteringTypeTest;
 
-class GamingSessionCategoryExperiencesTypeTest extends \PHPUnit_Framework_TestCase
+class GamingSessionCategoryExperiencesTypeTest extends AbstractSelfRegisteringTypeTest
 {
 
-    /**
-     * @test
-     */
-    public function I_can_register_it()
-    {
-        GamingSessionCategoryExperiencesType::registerSelf();
-
-        self::assertTrue(Type::hasType(GamingSessionCategoryExperiencesType::getTypeName()));
-        self::assertTrue(GamingSessionCategoryExperiencesType::isRegistered());
-        self::assertInstanceOf(
-            GamingSessionCategoryExperiencesType::class,
-            Type::getType(GamingSessionCategoryExperiencesType::getTypeName())
-        );
-    }
 }
