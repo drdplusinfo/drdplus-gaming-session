@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Tests\Person\GamingSession;
+namespace DrdPlus\Tests\GamingSession;
 
 use Granam\Tests\Exceptions\Tools\AbstractExceptionsHierarchyTest;
 

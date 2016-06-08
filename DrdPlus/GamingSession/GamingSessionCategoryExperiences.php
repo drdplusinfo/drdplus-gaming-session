@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Person\GamingSession;
+namespace DrdPlus\GamingSession;
 
 use Doctrineum\Integer\IntegerEnum;
 

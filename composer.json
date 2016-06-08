@@ -1,8 +1,8 @@
 {
-  "name": "drd-plus/person-gaming-session",
+  "name": "drd-plus/gaming-session",
   "license": "MIT",
   "type": "project",
-  "description": "Gaming session providing experiences to a person for Drd+",
+  "description": "Gaming session providing experiences to a being for Drd+",
   "autoload": {
     "psr-4": {
       "DrdPlus\\": "DrdPlus/"

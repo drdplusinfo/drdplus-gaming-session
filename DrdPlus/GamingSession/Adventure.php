@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Person\GamingSession;
+namespace DrdPlus\GamingSession;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -35,7 +35,7 @@ class Adventure extends StrictObject implements Entity, \IteratorAggregate, \Cou
     private $name;
     /**
      * Can be also filled by Doctrine on GaminSession database persistence,
-     * @see \DrdPlus\Person\GamingSession\GamingSession::__construct for linking
+     * @see \DrdPlus\GamingSession\GamingSession::__construct for linking
      *
      * @var GamingSession[]
      * @ORM\OneToMany(targetEntity="GamingSession", mappedBy="adventure", cascade={"persist"})

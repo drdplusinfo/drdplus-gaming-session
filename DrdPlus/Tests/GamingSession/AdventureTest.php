@@ -1,10 +1,10 @@
 <?php
-namespace DrdPlus\Tests\Person\GamingSession;
+namespace DrdPlus\Tests\GamingSession;
 
-use DrdPlus\Person\GamingSession\Adventure;
-use DrdPlus\Person\GamingSession\GamingSession;
-use DrdPlus\Person\GamingSession\GamingSessionCategoryExperiences;
-use DrdPlus\Person\GamingSession\Memories;
+use DrdPlus\GamingSession\Adventure;
+use DrdPlus\GamingSession\GamingSession;
+use DrdPlus\GamingSession\GamingSessionCategoryExperiences;
+use DrdPlus\GamingSession\Memories;
 use DrdPlus\Tables\Measurements\Experiences\Experiences;
 use DrdPlus\Tables\Tables;
 use Granam\Tests\Tools\TestWithMockery;

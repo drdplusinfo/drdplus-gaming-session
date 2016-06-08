@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Person\GamingSession;
+namespace DrdPlus\GamingSession;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -24,7 +24,7 @@ class Memories extends StrictObject implements Entity, \IteratorAggregate, \Coun
 
     /**
      * Can be also filled by Doctrine on Adventure database persistence,
-     * @see \DrdPlus\Person\GamingSession\GamingSession::__construct for linking
+     * @see \DrdPlus\GamingSession\GamingSession::__construct for linking
      *
      * @var Adventure[]
      * @ORM\OneToMany(targetEntity="Adventure", mappedBy="memories", cascade={"persist"})

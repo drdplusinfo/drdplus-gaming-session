@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Person\GamingSession\EnumTypes;
+namespace DrdPlus\GamingSession\EnumTypes;
 
 use Doctrineum\Integer\IntegerEnumType;
 

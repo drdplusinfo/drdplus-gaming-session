@@ -1,9 +1,9 @@
 <?php
-namespace DrdPlus\Tests\Person\GamingSession\EnumTypes;
+namespace DrdPlus\Tests\GamingSession\EnumTypes;
 
 use Doctrine\DBAL\Types\Type;
-use DrdPlus\Person\GamingSession\EnumTypes\GamingSessionCategoryExperiencesType;
-use DrdPlus\Person\GamingSession\EnumTypes\GamingSessionEnumRegistrar;
+use DrdPlus\GamingSession\EnumTypes\GamingSessionCategoryExperiencesType;
+use DrdPlus\GamingSession\EnumTypes\GamingSessionEnumRegistrar;
 
 class GamingSessionEnumRegistrarTest extends \PHPUnit_Framework_TestCase
 {

@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Tests\Person\GamingSession\EnumTypes;
+namespace DrdPlus\Tests\GamingSession\EnumTypes;
 
 use Doctrineum\Tests\SelfRegisteringType\AbstractSelfRegisteringTypeTest;
 

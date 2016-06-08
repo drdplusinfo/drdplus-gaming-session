@@ -1,8 +1,8 @@
 <?php
-namespace DrdPlus\Tests\Person\GamingSession;
+namespace DrdPlus\Tests\GamingSession;
 
 use Doctrine\DBAL\Types\Type;
-use DrdPlus\Person\GamingSession\GamingSessionCategoryExperiences;
+use DrdPlus\GamingSession\GamingSessionCategoryExperiences;
 
 class GamingSessionCategoryExperiencesTest extends \PHPUnit_Framework_TestCase
 {
@@ -20,7 +20,7 @@ class GamingSessionCategoryExperiencesTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException \DrdPlus\Person\GamingSession\Exceptions\ExperiencesTooLow
+     * @expectedException \DrdPlus\GamingSession\Exceptions\ExperiencesTooLow
      */
     public function I_can_not_create_too_low_category_experiences()
     {
@@ -29,7 +29,7 @@ class GamingSessionCategoryExperiencesTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException \DrdPlus\Person\GamingSession\Exceptions\ExperiencesTooHigh
+     * @expectedException \DrdPlus\GamingSession\Exceptions\ExperiencesTooHigh
      */
     public function I_can_not_create_too_high_category_experiences()
     {

@@ -1,12 +1,12 @@
 <?php
-namespace DrdPlus\Tests\Person\GamingSession;
+namespace DrdPlus\Tests\GamingSession;
 
 use Doctrineum\Tests\Entity\AbstractDoctrineEntitiesTest;
-use DrdPlus\Person\GamingSession\Adventure;
-use DrdPlus\Person\GamingSession\EnumTypes\GamingSessionCategoryExperiencesType;
-use DrdPlus\Person\GamingSession\GamingSession;
-use DrdPlus\Person\GamingSession\GamingSessionCategoryExperiences;
-use DrdPlus\Person\GamingSession\Memories;
+use DrdPlus\GamingSession\Adventure;
+use DrdPlus\GamingSession\EnumTypes\GamingSessionCategoryExperiencesType;
+use DrdPlus\GamingSession\GamingSession;
+use DrdPlus\GamingSession\GamingSessionCategoryExperiences;
+use DrdPlus\GamingSession\Memories;
 
 class DoctrineEntitiesTest extends AbstractDoctrineEntitiesTest
 {

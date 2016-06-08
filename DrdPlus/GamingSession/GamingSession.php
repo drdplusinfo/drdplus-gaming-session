@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Person\GamingSession;
+namespace DrdPlus\GamingSession;
 
 use Doctrineum\Entity\Entity;
 use DrdPlus\Tables\Measurements\Experiences\Experiences;

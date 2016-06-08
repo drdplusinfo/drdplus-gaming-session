@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Person\GamingSession\Exceptions;
+namespace DrdPlus\GamingSession\Exceptions;
 
 class ExperiencesTooHigh extends \LogicException implements Logic
 {
