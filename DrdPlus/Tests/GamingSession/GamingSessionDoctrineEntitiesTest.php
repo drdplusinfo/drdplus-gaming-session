@@ -8,7 +8,7 @@ use DrdPlus\GamingSession\GamingSession;
 use DrdPlus\GamingSession\GamingSessionCategoryExperiences;
 use DrdPlus\GamingSession\Memories;
 
-class DoctrineEntitiesTest extends AbstractDoctrineEntitiesTest
+class GamingSessionDoctrineEntitiesTest extends AbstractDoctrineEntitiesTest
 {
     protected function setUp()
     {
