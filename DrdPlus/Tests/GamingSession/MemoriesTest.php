@@ -17,6 +17,7 @@ class MemoriesTest extends TestWithMockery
     public function I_can_use_it()
     {
         $memories = new Memories();
+        self::assertNull($memories->getId());
 
         $firstAdventureExperienceValues = [];
         $firstAdventure = $memories->createAdventure($firstAdventureName = 'foo');
