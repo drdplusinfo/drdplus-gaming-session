@@ -1,4 +1,4 @@
-# Gaming session for DrD+
+# Gaming session for [DrD+](http://www.altar.cz/drdplus/)
 
 [![Build Status](https://travis-ci.org/jaroslavtyc/drd-plus-gaming-session.svg?branch=master)](https://travis-ci.org/jaroslavtyc/drd-plus-gaming-session)
 [![Test Coverage](https://codeclimate.com/github/jaroslavtyc/drd-plus-gaming-session/badges/coverage.svg)](https://codeclimate.com/github/jaroslavtyc/drd-plus-gaming-session/coverage)
