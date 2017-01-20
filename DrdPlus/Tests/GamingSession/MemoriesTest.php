@@ -44,7 +44,7 @@ class MemoriesTest extends TestWithMockery
             'foo baz'
         );
 
-        $totalExperiences = $memories->getExperiences((new Tables())->getExperiencesTable());
+        $totalExperiences = $memories->getExperiences(Tables::getIt()->getExperiencesTable());
         self::assertInstanceOf(Experiences::class, $totalExperiences);
         self::assertSame(
             array_sum($firstAdventureExperienceValues) + array_sum($secondAdventureExperienceValue),

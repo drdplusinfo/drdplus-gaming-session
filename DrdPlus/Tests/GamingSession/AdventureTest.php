@@ -25,7 +25,7 @@ class AdventureTest extends TestWithMockery
         self::assertSame($name, (string)$adventure);
         self::assertNull($adventure->getId());
         self::assertCount(0, $adventure->getGamingSessions());
-        $experiences = $adventure->getExperiences((new Tables())->getExperiencesTable());
+        $experiences = $adventure->getExperiences(Tables::getIt()->getExperiencesTable());
         self::assertInstanceOf(Experiences::class, $experiences);
         self::assertSame(0, $experiences->getValue());
     }
@@ -55,7 +55,7 @@ class AdventureTest extends TestWithMockery
             $firstGamingSessionName = 'bar'
         );
         self::assertInstanceOf(GamingSession::class, $firstGamingSession);
-        $experiencesTable = (new Tables())->getExperiencesTable();
+        $experiencesTable = Tables::getIt()->getExperiencesTable();
         self::assertInstanceOf(Experiences::class, $experiences = $adventure->getExperiences($experiencesTable));
         self::assertSame(array_sum($experienceValues), $experiences->getValue());
         self::assertSame($firstGamingSessionName, $firstGamingSession->getSessionName());
@@ -97,7 +97,7 @@ class AdventureTest extends TestWithMockery
 
     /**
      * @param $experiencesValue
-     * @return GamingSessionCategoryExperiences
+     * @return \Mockery\MockInterface|GamingSessionCategoryExperiences
      */
     private function createGamingSessionCategoryExperiences($experiencesValue)
     {
