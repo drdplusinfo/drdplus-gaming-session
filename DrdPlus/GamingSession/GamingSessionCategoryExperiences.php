@@ -10,13 +10,23 @@ class GamingSessionCategoryExperiences extends IntegerEnum
 
     /**
      * @param int $value
-     * @return GamingSessionCategoryExperiences
+     * @return GamingSessionCategoryExperiences|IntegerEnum
+     * @throws \Doctrineum\Integer\Exceptions\UnexpectedValueToConvert
+     * @throws \DrdPlus\GamingSession\Exceptions\ExperiencesTooHigh
+     * @throws \DrdPlus\GamingSession\Exceptions\ExperiencesTooLow
      */
     public static function getIt($value)
     {
         return self::getEnum($value);
     }
 
+    /**
+     * @param mixed $value
+     * @return int
+     * @throws \Doctrineum\Integer\Exceptions\UnexpectedValueToConvert
+     * @throws \DrdPlus\GamingSession\Exceptions\ExperiencesTooHigh
+     * @throws \DrdPlus\GamingSession\Exceptions\ExperiencesTooLow
+     */
     protected static function convertToEnumFinalValue($value)
     {
         $asInteger = parent::convertToEnumFinalValue($value);
@@ -25,6 +35,11 @@ class GamingSessionCategoryExperiences extends IntegerEnum
         return $asInteger;
     }
 
+    /**
+     * @param int $experiences
+     * @throws \DrdPlus\GamingSession\Exceptions\ExperiencesTooHigh
+     * @throws \DrdPlus\GamingSession\Exceptions\ExperiencesTooLow
+     */
     private static function guardExperiencesBoundary($experiences)
     {
         if ($experiences < self::MINIMUM_CATEGORY_EXPERIENCES) {

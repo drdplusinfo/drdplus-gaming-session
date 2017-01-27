@@ -78,11 +78,17 @@ class Memories extends StrictObject implements Entity, \IteratorAggregate, \Coun
         return new Experiences($experiencesSum, $experiencesTable);
     }
 
+    /**
+     * @return \Traversable
+     */
     public function getIterator()
     {
         return $this->getAdventures()->getIterator();
     }
 
+    /**
+     * @return int
+     */
     public function count()
     {
         return $this->getAdventures()->count();

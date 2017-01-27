@@ -65,6 +65,7 @@ class GamingSession extends StrictObject implements Entity, \IteratorAggregate
      * @param GamingSessionCategoryExperiences $companionsHelpingExperiences
      * @param GamingSessionCategoryExperiences $gameContributingExperiences
      * @param string $sessionName
+     * @throws \Granam\Scalar\Tools\Exceptions\WrongParameterType
      */
     public function __construct(
         Adventure $adventure,
