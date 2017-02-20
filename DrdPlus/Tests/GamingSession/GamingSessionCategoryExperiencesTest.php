@@ -3,8 +3,9 @@ namespace DrdPlus\Tests\GamingSession;
 
 use Doctrine\DBAL\Types\Type;
 use DrdPlus\GamingSession\GamingSessionCategoryExperiences;
+use PHPUnit\Framework\TestCase;
 
-class GamingSessionCategoryExperiencesTest extends \PHPUnit_Framework_TestCase
+class GamingSessionCategoryExperiencesTest extends TestCase
 {
     /**
      * @test

@@ -4,8 +4,9 @@ namespace DrdPlus\Tests\GamingSession\EnumTypes;
 use Doctrine\DBAL\Types\Type;
 use DrdPlus\GamingSession\EnumTypes\GamingSessionCategoryExperiencesType;
 use DrdPlus\GamingSession\EnumTypes\GamingSessionEnumRegistrar;
+use PHPUnit\Framework\TestCase;
 
-class GamingSessionEnumRegistrarTest extends \PHPUnit_Framework_TestCase
+class GamingSessionEnumRegistrarTest extends TestCase
 {
     /**
      * @test
