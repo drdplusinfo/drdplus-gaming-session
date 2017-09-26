@@ -9,7 +9,7 @@
     }
   },
   "require": {
-    "php": ">=7.0",
+    "php": ">=7.1",
     "doctrineum/integer": "dev-master",
     "drd-plus/tables": "dev-master",
     "doctrineum/entity": "dev-master",
