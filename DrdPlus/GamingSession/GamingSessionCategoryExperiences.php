@@ -27,7 +27,7 @@ class GamingSessionCategoryExperiences extends IntegerEnum
      * @throws \DrdPlus\GamingSession\Exceptions\ExperiencesTooHigh
      * @throws \DrdPlus\GamingSession\Exceptions\ExperiencesTooLow
      */
-    protected static function convertToEnumFinalValue($value)
+    protected static function convertToEnumFinalValue($value): int
     {
         $asInteger = parent::convertToEnumFinalValue($value);
         self::guardExperiencesBoundary($asInteger);

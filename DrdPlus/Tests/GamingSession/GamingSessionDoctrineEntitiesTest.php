@@ -33,7 +33,7 @@ class GamingSessionDoctrineEntitiesTest extends AbstractDoctrineEntitiesTest
         ];
     }
 
-    protected function createEntitiesToPersist()
+    protected function createEntitiesToPersist(): array
     {
         $memories = new Memories();
 
