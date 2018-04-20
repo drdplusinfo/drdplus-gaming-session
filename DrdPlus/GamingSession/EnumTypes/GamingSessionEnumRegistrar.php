@@ -3,7 +3,10 @@ namespace DrdPlus\GamingSession\EnumTypes;
 
 class GamingSessionEnumRegistrar
 {
-    public static function registerAll()
+    /**
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public static function registerAll(): void
     {
         GamingSessionCategoryExperiencesType::registerSelf();
     }
