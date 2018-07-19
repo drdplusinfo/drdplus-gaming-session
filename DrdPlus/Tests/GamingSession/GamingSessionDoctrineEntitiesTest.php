@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace DrdPlus\Tests\GamingSession;
 
 use Doctrineum\Tests\Entity\AbstractDoctrineEntitiesTest;
@@ -10,21 +12,26 @@ use DrdPlus\GamingSession\Memories;
 
 class GamingSessionDoctrineEntitiesTest extends AbstractDoctrineEntitiesTest
 {
-    protected function setUp()
+    /**
+     * @throws \Doctrine\Common\Annotations\AnnotationException
+     * @throws \Doctrine\DBAL\DBALException
+     * @throws \Doctrine\ORM\ORMException
+     */
+    protected function setUp(): void
     {
         GamingSessionCategoryExperiencesType::registerSelf();
 
         parent::setUp();
     }
 
-    protected function getDirsWithEntities()
+    protected function getDirsWithEntities(): array
     {
         return [
             str_replace(DIRECTORY_SEPARATOR . 'Tests', '', __DIR__),
         ];
     }
 
-    protected function getExpectedEntityClasses()
+    protected function getExpectedEntityClasses(): array
     {
         return [
             Memories::class,

@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace DrdPlus\GamingSession;
 
 use Doctrineum\Entity\Entity;
@@ -14,7 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
 class GamingSession extends StrictObject implements Entity, \IteratorAggregate
 {
     /**
-     * @var int
+     * @var int|null
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue
@@ -62,7 +64,6 @@ class GamingSession extends StrictObject implements Entity, \IteratorAggregate
      * @param GamingSessionCategoryExperiences $difficultiesSolvingExperiences
      * @param GamingSessionCategoryExperiences $abilityUsageExperiences
      * @param GamingSessionCategoryExperiences $companionsHelpingExperiences
-     * @param GamingSessionCategoryExperiences $companionsHelpingExperiences
      * @param GamingSessionCategoryExperiences $gameContributingExperiences
      * @param string $sessionName
      * @throws \Granam\Scalar\Tools\Exceptions\WrongParameterType
@@ -74,7 +75,7 @@ class GamingSession extends StrictObject implements Entity, \IteratorAggregate
         GamingSessionCategoryExperiences $abilityUsageExperiences,
         GamingSessionCategoryExperiences $companionsHelpingExperiences,
         GamingSessionCategoryExperiences $gameContributingExperiences,
-        $sessionName
+        string $sessionName
     )
     {
         $this->adventure = $adventure;
@@ -87,9 +88,9 @@ class GamingSession extends StrictObject implements Entity, \IteratorAggregate
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -97,7 +98,7 @@ class GamingSession extends StrictObject implements Entity, \IteratorAggregate
     /**
      * @return Adventure
      */
-    public function getAdventure()
+    public function getAdventure(): Adventure
     {
         return $this->adventure;
     }
@@ -105,7 +106,7 @@ class GamingSession extends StrictObject implements Entity, \IteratorAggregate
     /**
      * @return GamingSessionCategoryExperiences
      */
-    public function getRolePlayingExperiences()
+    public function getRolePlayingExperiences(): GamingSessionCategoryExperiences
     {
         return $this->rolePlayingExperiences;
     }
@@ -113,7 +114,7 @@ class GamingSession extends StrictObject implements Entity, \IteratorAggregate
     /**
      * @return GamingSessionCategoryExperiences
      */
-    public function getDifficultiesSolvingExperiences()
+    public function getDifficultiesSolvingExperiences(): GamingSessionCategoryExperiences
     {
         return $this->difficultiesSolvingExperiences;
     }
@@ -121,7 +122,7 @@ class GamingSession extends StrictObject implements Entity, \IteratorAggregate
     /**
      * @return GamingSessionCategoryExperiences
      */
-    public function getAbilityUsageExperiences()
+    public function getAbilityUsageExperiences(): GamingSessionCategoryExperiences
     {
         return $this->abilityUsageExperiences;
     }
@@ -129,7 +130,7 @@ class GamingSession extends StrictObject implements Entity, \IteratorAggregate
     /**
      * @return GamingSessionCategoryExperiences
      */
-    public function getCompanionsHelpingExperiences()
+    public function getCompanionsHelpingExperiences(): GamingSessionCategoryExperiences
     {
         return $this->companionsHelpingExperiences;
     }
@@ -137,7 +138,7 @@ class GamingSession extends StrictObject implements Entity, \IteratorAggregate
     /**
      * @return GamingSessionCategoryExperiences
      */
-    public function getGameContributingExperiences()
+    public function getGameContributingExperiences(): GamingSessionCategoryExperiences
     {
         return $this->gameContributingExperiences;
     }
@@ -146,18 +147,15 @@ class GamingSession extends StrictObject implements Entity, \IteratorAggregate
      * @param ExperiencesTable $experiencesTable
      * @return Experiences
      */
-    public function getExperiences(ExperiencesTable $experiencesTable)
+    public function getExperiences(ExperiencesTable $experiencesTable): Experiences
     {
-        return new Experiences(
-            $this->sumExperiences(),
-            $experiencesTable
-        );
+        return new Experiences($this->sumExperiences(), $experiencesTable);
     }
 
     /**
      * @return int
      */
-    private function sumExperiences()
+    private function sumExperiences(): int
     {
         return
             $this->rolePlayingExperiences->getValue()
@@ -170,12 +168,12 @@ class GamingSession extends StrictObject implements Entity, \IteratorAggregate
     /**
      * @return string
      */
-    public function getSessionName()
+    public function getSessionName(): string
     {
         return $this->sessionName;
     }
 
-    public function getIterator()
+    public function getIterator(): \ArrayIterator
     {
         return new \ArrayIterator([
             $this->getRolePlayingExperiences(),

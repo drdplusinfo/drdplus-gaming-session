@@ -1,4 +1,6 @@
 <?php
+declare(strict_types = 1);
+
 namespace DrdPlus\Tests\GamingSession;
 
 use DrdPlus\GamingSession\Adventure;
@@ -14,7 +16,7 @@ class AdventureTest extends TestWithMockery
     /**
      * @test
      */
-    public function I_can_use_it_as_new()
+    public function I_can_use_it_as_new(): void
     {
         $adventure = new Adventure(
             $memories = $this->createMemories(),
@@ -33,7 +35,7 @@ class AdventureTest extends TestWithMockery
     /**
      * @return \Mockery\MockInterface|Memories
      */
-    private function createMemories()
+    private function createMemories(): Memories
     {
         return $this->mockery(Memories::class);
     }
@@ -41,7 +43,7 @@ class AdventureTest extends TestWithMockery
     /**
      * @test
      */
-    public function I_can_add_gaming_session()
+    public function I_can_add_gaming_session(): void
     {
         $adventure = new Adventure($this->createMemories(), 'foo');
         $experienceValues = [];

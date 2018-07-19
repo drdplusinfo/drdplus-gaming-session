@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace DrdPlus\GamingSession;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -17,7 +19,7 @@ use Traversable;
 class Adventure extends StrictObject implements Entity, \IteratorAggregate, \Countable
 {
     /**
-     * @var int
+     * @var int|null
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue
@@ -55,9 +57,9 @@ class Adventure extends StrictObject implements Entity, \IteratorAggregate, \Cou
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -65,7 +67,7 @@ class Adventure extends StrictObject implements Entity, \IteratorAggregate, \Cou
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -73,7 +75,7 @@ class Adventure extends StrictObject implements Entity, \IteratorAggregate, \Cou
     /**
      * @return Memories
      */
-    public function getMemories()
+    public function getMemories(): Memories
     {
         return $this->memories;
     }
@@ -93,8 +95,8 @@ class Adventure extends StrictObject implements Entity, \IteratorAggregate, \Cou
         GamingSessionCategoryExperiences $abilityUsageExperiences,
         GamingSessionCategoryExperiences $companionsHelpingExperiences,
         GamingSessionCategoryExperiences $gameContributingExperiences,
-        $sessionName
-    )
+        string $sessionName
+    ): GamingSession
     {
         $gamingSession = new GamingSession(
             $this,
@@ -122,7 +124,7 @@ class Adventure extends StrictObject implements Entity, \IteratorAggregate, \Cou
      * @param ExperiencesTable $experiencesTable
      * @return Experiences
      */
-    public function getExperiences(ExperiencesTable $experiencesTable)
+    public function getExperiences(ExperiencesTable $experiencesTable): Experiences
     {
         $experiencesSum = 0;
         foreach ($this->getGamingSessions() as $gamingSession) {
@@ -135,7 +137,7 @@ class Adventure extends StrictObject implements Entity, \IteratorAggregate, \Cou
     /**
      * @return Traversable
      */
-    public function getIterator()
+    public function getIterator(): \Traversable
     {
         return $this->getGamingSessions()->getIterator();
     }
@@ -143,7 +145,7 @@ class Adventure extends StrictObject implements Entity, \IteratorAggregate, \Cou
     /**
      * @return int
      */
-    public function count()
+    public function count(): int
     {
         return $this->getGamingSessions()->count();
     }
