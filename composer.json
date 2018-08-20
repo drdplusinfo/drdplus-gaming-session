@@ -1,5 +1,5 @@
 {
-  "name": "drd-plus/gaming-session",
+  "name": "drdplus/gaming-session",
   "license": "MIT",
   "type": "project",
   "description": "Gaming session providing experiences to a being for Drd+",
@@ -13,7 +13,7 @@
     "doctrine/orm": "~2.1",
     "doctrineum/entity": "^2.1",
     "doctrineum/integer": "^3.1",
-    "drd-plus/tables": "^1.0"
+    "drdplus/tables": "^1.0"
   },
   "require-dev": {
     "roave/security-advisories": "dev-master",
