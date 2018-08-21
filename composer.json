@@ -1,7 +1,7 @@
 {
   "name": "drdplus/gaming-session",
   "license": "MIT",
-  "type": "project",
+  "type": "library",
   "description": "Gaming session providing experiences to a being for Drd+",
   "autoload": {
     "psr-4": {
@@ -20,7 +20,5 @@
     "phpunit/phpunit": "~7.0",
     "mockery/mockery": "~1.0",
     "granam/exceptions-hierarchy": "~4.0"
-  },
-  "minimum-stability": "dev",
-  "prefer-stable": true
+  }
 }
