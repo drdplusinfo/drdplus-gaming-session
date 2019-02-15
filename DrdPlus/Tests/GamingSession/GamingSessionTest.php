@@ -6,7 +6,6 @@ namespace DrdPlus\Tests\GamingSession;
 use DrdPlus\GamingSession\Adventure;
 use DrdPlus\GamingSession\GamingSession;
 use DrdPlus\GamingSession\GamingSessionCategoryExperiences;
-use DrdPlus\Tables\Measurements\Experiences\Experiences;
 use DrdPlus\Tables\Tables;
 use Granam\Tests\Tools\TestWithMockery;
 
@@ -27,7 +26,6 @@ class GamingSessionTest extends TestWithMockery
             $categorizedExperiences[] = $gameContributingExperiences = $this->createGamingSessionCategoryExperiences($experienceValues[] = 5),
             $sessionName = 'foo'
         );
-        self::assertNull($gamingSession->getId());
         self::assertSame($adventure, $gamingSession->getAdventure());
         self::assertSame($rolePlayingExperiences, $gamingSession->getRolePlayingExperiences());
         self::assertSame($difficultiesSolvingExperiences, $gamingSession->getDifficultiesSolvingExperiences());
@@ -37,7 +35,6 @@ class GamingSessionTest extends TestWithMockery
         self::assertSame($sessionName, $gamingSession->getSessionName());
 
         $experiences = $gamingSession->getExperiences(Tables::getIt()->getExperiencesTable());
-        self::assertInstanceOf(Experiences::class, $experiences);
         $sameExperiencesNewInstance = $gamingSession->getExperiences(Tables::getIt()->getExperiencesTable());
         self::assertEquals($experiences, $sameExperiencesNewInstance);
         self::assertNotSame($experiences, $sameExperiencesNewInstance);

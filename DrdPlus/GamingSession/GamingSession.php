@@ -3,58 +3,40 @@ declare(strict_types=1);
 
 namespace DrdPlus\GamingSession;
 
-use Doctrineum\Entity\Entity;
 use DrdPlus\Tables\Measurements\Experiences\Experiences;
 use DrdPlus\Tables\Measurements\Experiences\ExperiencesTable;
 use Granam\Scalar\Tools\ToString;
 use Granam\Strict\Object\StrictObject;
-use Doctrine\ORM\Mapping as ORM;
+use Granam\String\StringInterface;
 
-/**
- * @ORM\Entity()
- */
-class GamingSession extends StrictObject implements Entity, \IteratorAggregate
+class GamingSession extends StrictObject implements \IteratorAggregate
 {
     /**
-     * @var int|null
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue
-     */
-    private $id;
-    /**
      * @var GamingSessionCategoryExperiences
-     * @ORM\Column(type="gaming_session_category_experiences")
      */
     private $rolePlayingExperiences;
     /**
      * @var GamingSessionCategoryExperiences
-     * @ORM\Column(type="gaming_session_category_experiences")
      */
     private $difficultiesSolvingExperiences;
     /**
      * @var GamingSessionCategoryExperiences
-     * @ORM\Column(type="gaming_session_category_experiences")
      */
     private $abilityUsageExperiences;
     /**
      * @var GamingSessionCategoryExperiences
-     * @ORM\Column(type="gaming_session_category_experiences")
      */
     private $companionsHelpingExperiences;
     /**
      * @var GamingSessionCategoryExperiences
-     * @ORM\Column(type="gaming_session_category_experiences")
      */
     private $gameContributingExperiences;
     /**
      * @var string
-     * @ORM\Column(type="string")
      */
     private $sessionName;
     /**
      * @var Adventure
-     * @ORM\ManyToOne(targetEntity="Adventure", inversedBy="gamingSessions", cascade={"persist"})
      */
     private $adventure;
 
@@ -65,8 +47,7 @@ class GamingSession extends StrictObject implements Entity, \IteratorAggregate
      * @param GamingSessionCategoryExperiences $abilityUsageExperiences
      * @param GamingSessionCategoryExperiences $companionsHelpingExperiences
      * @param GamingSessionCategoryExperiences $gameContributingExperiences
-     * @param string $sessionName
-     * @throws \Granam\Scalar\Tools\Exceptions\WrongParameterType
+     * @param string|StringInterface $sessionName
      */
     public function __construct(
         Adventure $adventure,
@@ -75,7 +56,7 @@ class GamingSession extends StrictObject implements Entity, \IteratorAggregate
         GamingSessionCategoryExperiences $abilityUsageExperiences,
         GamingSessionCategoryExperiences $companionsHelpingExperiences,
         GamingSessionCategoryExperiences $gameContributingExperiences,
-        string $sessionName
+        $sessionName
     )
     {
         $this->adventure = $adventure;
@@ -87,74 +68,41 @@ class GamingSession extends StrictObject implements Entity, \IteratorAggregate
         $this->sessionName = ToString::toString($sessionName);
     }
 
-    /**
-     * @return int|null
-     */
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return Adventure
-     */
     public function getAdventure(): Adventure
     {
         return $this->adventure;
     }
 
-    /**
-     * @return GamingSessionCategoryExperiences
-     */
     public function getRolePlayingExperiences(): GamingSessionCategoryExperiences
     {
         return $this->rolePlayingExperiences;
     }
 
-    /**
-     * @return GamingSessionCategoryExperiences
-     */
     public function getDifficultiesSolvingExperiences(): GamingSessionCategoryExperiences
     {
         return $this->difficultiesSolvingExperiences;
     }
 
-    /**
-     * @return GamingSessionCategoryExperiences
-     */
     public function getAbilityUsageExperiences(): GamingSessionCategoryExperiences
     {
         return $this->abilityUsageExperiences;
     }
 
-    /**
-     * @return GamingSessionCategoryExperiences
-     */
     public function getCompanionsHelpingExperiences(): GamingSessionCategoryExperiences
     {
         return $this->companionsHelpingExperiences;
     }
 
-    /**
-     * @return GamingSessionCategoryExperiences
-     */
     public function getGameContributingExperiences(): GamingSessionCategoryExperiences
     {
         return $this->gameContributingExperiences;
     }
 
-    /**
-     * @param ExperiencesTable $experiencesTable
-     * @return Experiences
-     */
     public function getExperiences(ExperiencesTable $experiencesTable): Experiences
     {
         return new Experiences($this->sumExperiences(), $experiencesTable);
     }
 
-    /**
-     * @return int
-     */
     private function sumExperiences(): int
     {
         return
@@ -165,9 +113,6 @@ class GamingSession extends StrictObject implements Entity, \IteratorAggregate
             + $this->gameContributingExperiences->getValue();
     }
 
-    /**
-     * @return string
-     */
     public function getSessionName(): string
     {
         return $this->sessionName;
@@ -180,7 +125,7 @@ class GamingSession extends StrictObject implements Entity, \IteratorAggregate
             $this->getDifficultiesSolvingExperiences(),
             $this->getAbilityUsageExperiences(),
             $this->getCompanionsHelpingExperiences(),
-            $this->getGameContributingExperiences()
+            $this->getGameContributingExperiences(),
         ]);
     }
 

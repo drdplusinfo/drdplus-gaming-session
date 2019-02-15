@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace DrdPlus\GamingSession;
 
@@ -10,90 +10,52 @@ use Doctrineum\Entity\Entity;
 use DrdPlus\Tables\Measurements\Experiences\Experiences;
 use DrdPlus\Tables\Measurements\Experiences\ExperiencesTable;
 use Granam\Strict\Object\StrictObject;
+use Granam\String\StringInterface;
 
-/**
- * @ORM\Entity()
- */
-class Memories extends StrictObject implements Entity, \IteratorAggregate, \Countable
+class Memories extends StrictObject implements \IteratorAggregate, \Countable
 {
     /**
-     * @var int
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue
-     */
-    private $id;
-
-    /**
-     * Can be also filled by Doctrine on Adventure database persistence,
-     * @see \DrdPlus\GamingSession\GamingSession::__construct for linking
-     *
      * @var Adventure[]
-     * @ORM\OneToMany(targetEntity="Adventure", mappedBy="memories", cascade={"persist"})
      */
-    private $adventures;
-
-    public function __construct()
-    {
-        $this->adventures = new ArrayCollection();
-    }
+    private $adventures = [];
 
     /**
-     * @return int
+     * @return Adventure[]|array
      */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return Adventure[]|Collection
-     */
-    public function getAdventures()
+    public function getAdventures(): array
     {
         return $this->adventures;
     }
 
     /**
-     * @param string $name
+     * @param string|StringInterface $name
      * @return Adventure
      */
-    public function createAdventure($name)
+    public function createAdventure($name): Adventure
     {
         $adventure = new Adventure($this, $name);
-        $this->getAdventures()->add($adventure);
+        $this->adventures[] = $adventure;
 
         return $adventure;
     }
 
-    /**
-     * @param ExperiencesTable $experiencesTable
-     * @return Experiences
-     */
-    public function getExperiences(ExperiencesTable $experiencesTable)
+    public function getExperiences(ExperiencesTable $experiencesTable): Experiences
     {
         $experiencesSum = 0;
         foreach ($this->getAdventures() as $adventure) {
             $experiencesSum += $adventure->getExperiences($experiencesTable)->getValue();
         }
-
         return new Experiences($experiencesSum, $experiencesTable);
     }
 
-    /**
-     * @return \Traversable
-     */
-    public function getIterator()
+    public function getIterator(): \Iterator
     {
-        return $this->getAdventures()->getIterator();
+        return new \ArrayIterator($this->getAdventures());
     }
 
-    /**
-     * @return int
-     */
-    public function count()
+    public function count(): int
     {
-        return $this->getAdventures()->count();
+        return \count($this->getAdventures());
     }
 
 }

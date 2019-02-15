@@ -3,52 +3,35 @@ declare(strict_types=1);
 
 namespace DrdPlus\GamingSession;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
-use Doctrineum\Entity\Entity;
 use DrdPlus\Tables\Measurements\Experiences\Experiences;
 use DrdPlus\Tables\Measurements\Experiences\ExperiencesTable;
 use Granam\Scalar\Tools\ToString;
 use Granam\Strict\Object\StrictObject;
-use Traversable;
+use Granam\String\StringInterface;
 
-/**
- * @ORM\Entity()
- */
-class Adventure extends StrictObject implements Entity, \IteratorAggregate, \Countable
+class Adventure extends StrictObject implements \IteratorAggregate, \Countable
 {
     /**
-     * @var int|null
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue
-     */
-    private $id;
-    /**
      * @var Memories
-     * @ORM\ManyToOne(targetEntity="Memories", inversedBy="adventures", cascade={"persist"})
      */
     private $memories;
     /**
      * @var string
-     * @ORM\Column(type="string", unique=true)
      */
     private $name;
     /**
-     * Can be also filled by Doctrine on GaminSession database persistence,
-     * @see \DrdPlus\GamingSession\GamingSession::__construct for linking
-     *
      * @var GamingSession[]
-     * @ORM\OneToMany(targetEntity="GamingSession", mappedBy="adventure", cascade={"persist"})
      */
-    private $gamingSessions;
+    private $gamingSessions = [];
 
+    /**
+     * @param Memories $memories
+     * @param string|StringInterface $name
+     */
     public function __construct(Memories $memories, $name)
     {
         $this->memories = $memories;
         $this->name = ToString::toString($name);
-        $this->gamingSessions = new ArrayCollection();
     }
 
     public function __toString()
@@ -56,39 +39,16 @@ class Adventure extends StrictObject implements Entity, \IteratorAggregate, \Cou
         return $this->getName();
     }
 
-    /**
-     * @return int|null
-     */
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return Memories
-     */
     public function getMemories(): Memories
     {
         return $this->memories;
     }
 
-    /**
-     * @param GamingSessionCategoryExperiences $rolePlayingExperiences
-     * @param GamingSessionCategoryExperiences $difficultiesSolvingExperiences
-     * @param GamingSessionCategoryExperiences $abilityUsageExperiences
-     * @param GamingSessionCategoryExperiences $companionsHelpingExperiences
-     * @param GamingSessionCategoryExperiences $gameContributingExperiences
-     * @param string $sessionName
-     * @return GamingSession
-     */
     public function createGamingSession(
         GamingSessionCategoryExperiences $rolePlayingExperiences,
         GamingSessionCategoryExperiences $difficultiesSolvingExperiences,
@@ -107,47 +67,36 @@ class Adventure extends StrictObject implements Entity, \IteratorAggregate, \Cou
             $gameContributingExperiences,
             $sessionName
         );
-        $this->getGamingSessions()->add($gamingSession);
+        $this->gamingSessions[] = $gamingSession;
 
         return $gamingSession;
     }
 
     /**
-     * @return GamingSession[]|Collection
+     * @return GamingSession[]|array
      */
-    public function getGamingSessions()
+    public function getGamingSessions(): array
     {
         return $this->gamingSessions;
     }
 
-    /**
-     * @param ExperiencesTable $experiencesTable
-     * @return Experiences
-     */
     public function getExperiences(ExperiencesTable $experiencesTable): Experiences
     {
         $experiencesSum = 0;
         foreach ($this->getGamingSessions() as $gamingSession) {
             $experiencesSum += $gamingSession->getExperiences($experiencesTable)->getValue();
         }
-
         return new Experiences($experiencesSum, $experiencesTable);
     }
 
-    /**
-     * @return Traversable
-     */
-    public function getIterator(): \Traversable
+    public function getIterator(): \Iterator
     {
-        return $this->getGamingSessions()->getIterator();
+        return new \ArrayIterator($this->getGamingSessions());
     }
 
-    /**
-     * @return int
-     */
     public function count(): int
     {
-        return $this->getGamingSessions()->count();
+        return \count($this->getGamingSessions());
     }
 
 }

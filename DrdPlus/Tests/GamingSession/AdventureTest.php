@@ -1,10 +1,9 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace DrdPlus\Tests\GamingSession;
 
 use DrdPlus\GamingSession\Adventure;
-use DrdPlus\GamingSession\GamingSession;
 use DrdPlus\GamingSession\GamingSessionCategoryExperiences;
 use DrdPlus\GamingSession\Memories;
 use DrdPlus\Tables\Measurements\Experiences\Experiences;
@@ -18,17 +17,12 @@ class AdventureTest extends TestWithMockery
      */
     public function I_can_use_it_as_new(): void
     {
-        $adventure = new Adventure(
-            $memories = $this->createMemories(),
-            $name = 'foo'
-        );
+        $adventure = new Adventure($memories = $this->createMemories(), $name = 'foo');
         self::assertSame($memories, $adventure->getMemories());
         self::assertSame($name, $adventure->getName());
         self::assertSame($name, (string)$adventure);
-        self::assertNull($adventure->getId());
         self::assertCount(0, $adventure->getGamingSessions());
         $experiences = $adventure->getExperiences(Tables::getIt()->getExperiencesTable());
-        self::assertInstanceOf(Experiences::class, $experiences);
         self::assertSame(0, $experiences->getValue());
     }
 
@@ -56,10 +50,9 @@ class AdventureTest extends TestWithMockery
             $gameContributingExperiences = $this->createGamingSessionCategoryExperiences($experienceValues[] = 5),
             $firstGamingSessionName = 'bar'
         );
-        self::assertInstanceOf(GamingSession::class, $firstGamingSession);
         $experiencesTable = Tables::getIt()->getExperiencesTable();
         self::assertInstanceOf(Experiences::class, $experiences = $adventure->getExperiences($experiencesTable));
-        self::assertSame(array_sum($experienceValues), $experiences->getValue());
+        self::assertSame(\array_sum($experienceValues), $experiences->getValue());
         self::assertSame($firstGamingSessionName, $firstGamingSession->getSessionName());
         self::assertSame($rolePlayingExperiences, $firstGamingSession->getRolePlayingExperiences());
         self::assertSame($difficultiesSolvingExperiences, $firstGamingSession->getDifficultiesSolvingExperiences());
@@ -75,11 +68,10 @@ class AdventureTest extends TestWithMockery
             $gameContributingExperiences = $this->createGamingSessionCategoryExperiences($experienceValues[] = 10),
             $secondGamingSessionName = 'baz'
         );
-        self::assertInstanceOf(GamingSession::class, $secondGamingSession);
         self::assertInstanceOf(Experiences::class, $newExperiences = $adventure->getExperiences($experiencesTable));
         self::assertNotEquals($experiences, $newExperiences);
         self::assertSame(
-            array_sum($experienceValues),
+            \array_sum($experienceValues),
             $newExperiences->getValue(),
             'Experiences should be always recalculated to catch new gaming session anytime'
         );

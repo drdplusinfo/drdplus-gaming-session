@@ -3,21 +3,19 @@ declare(strict_types = 1);
 
 namespace DrdPlus\GamingSession;
 
-use Doctrineum\Integer\IntegerEnum;
+use Granam\Integer\IntegerInterface;
+use Granam\IntegerEnum\IntegerEnum;
 
 class GamingSessionCategoryExperiences extends IntegerEnum
 {
-    const MINIMUM_CATEGORY_EXPERIENCES = 0;
-    const MAXIMUM_CATEGORY_EXPERIENCES = 3;
+    public const MINIMUM_CATEGORY_EXPERIENCES = 0;
+    public const MAXIMUM_CATEGORY_EXPERIENCES = 3;
 
     /**
-     * @param int $value
+     * @param int|IntegerInterface $value
      * @return GamingSessionCategoryExperiences|IntegerEnum
-     * @throws \Doctrineum\Integer\Exceptions\UnexpectedValueToConvert
-     * @throws \DrdPlus\GamingSession\Exceptions\ExperiencesTooHigh
-     * @throws \DrdPlus\GamingSession\Exceptions\ExperiencesTooLow
      */
-    public static function getIt($value)
+    public static function getIt($value): GamingSessionCategoryExperiences
     {
         return self::getEnum($value);
     }
@@ -25,9 +23,6 @@ class GamingSessionCategoryExperiences extends IntegerEnum
     /**
      * @param mixed $value
      * @return int
-     * @throws \Doctrineum\Integer\Exceptions\UnexpectedValueToConvert
-     * @throws \DrdPlus\GamingSession\Exceptions\ExperiencesTooHigh
-     * @throws \DrdPlus\GamingSession\Exceptions\ExperiencesTooLow
      */
     protected static function convertToEnumFinalValue($value): int
     {

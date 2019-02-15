@@ -1,9 +1,8 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace DrdPlus\Tests\GamingSession;
 
-use Doctrine\DBAL\Types\Type;
 use DrdPlus\GamingSession\GamingSessionCategoryExperiences;
 use PHPUnit\Framework\TestCase;
 
@@ -37,28 +36,5 @@ class GamingSessionCategoryExperiencesTest extends TestCase
     public function I_can_not_create_too_high_category_experiences(): void
     {
         GamingSessionCategoryExperiences::getIt(4);
-    }
-
-    /**
-     * @test
-     * @throws \ReflectionException
-     */
-    public function I_can_register_it_as_doctrine_type(): void
-    {
-        $typeClass = $this->getDoctrineTypeClass();
-        self::assertTrue(class_exists($typeClass), "Doctrine type class not found: $typeClass");
-        self::assertTrue(is_a($typeClass, Type::class, true), "Type class should be Doctrine type: $typeClass");
-    }
-
-    /**
-     * @throws \ReflectionException
-     */
-    private function getDoctrineTypeClass(): string
-    {
-        $reflection = new \ReflectionClass(GamingSessionCategoryExperiences::class);
-        $namespace = $reflection->getNamespaceName() . '\\EnumTypes';
-        $baseName = $reflection->getShortName() . 'Type';
-
-        return $namespace . '\\' . $baseName;
     }
 }

@@ -1,12 +1,10 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace DrdPlus\Tests\GamingSession;
 
-use DrdPlus\GamingSession\Adventure;
 use DrdPlus\GamingSession\GamingSessionCategoryExperiences;
 use DrdPlus\GamingSession\Memories;
-use DrdPlus\Tables\Measurements\Experiences\Experiences;
 use DrdPlus\Tables\Tables;
 use Granam\Tests\Tools\TestWithMockery;
 
@@ -19,11 +17,9 @@ class MemoriesTest extends TestWithMockery
     public function I_can_use_it(): void
     {
         $memories = new Memories();
-        self::assertNull($memories->getId());
 
         $firstAdventureExperienceValues = [];
         $firstAdventure = $memories->createAdventure($firstAdventureName = 'foo');
-        self::assertInstanceOf(Adventure::class, $firstAdventure);
         self::assertSame($firstAdventureName, $firstAdventure->getName());
         $firstAdventure->createGamingSession(
             $this->createGamingSessionCategoryExperiences($firstAdventureExperienceValues[] = 1),
@@ -47,9 +43,8 @@ class MemoriesTest extends TestWithMockery
         );
 
         $totalExperiences = $memories->getExperiences(Tables::getIt()->getExperiencesTable());
-        self::assertInstanceOf(Experiences::class, $totalExperiences);
         self::assertSame(
-            array_sum($firstAdventureExperienceValues) + array_sum($secondAdventureExperienceValue),
+            \array_sum($firstAdventureExperienceValues) + array_sum($secondAdventureExperienceValue),
             $totalExperiences->getValue()
         );
         self::assertCount(2, $memories);
