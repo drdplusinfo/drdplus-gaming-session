@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace DrdPlus\Tests\GamingSession;
 
@@ -7,7 +6,7 @@ use DrdPlus\GamingSession\Adventure;
 use DrdPlus\GamingSession\GamingSession;
 use DrdPlus\GamingSession\GamingSessionCategoryExperiences;
 use DrdPlus\Tables\Tables;
-use Granam\Tests\Tools\TestWithMockery;
+use Granam\TestWithMockery\TestWithMockery;
 
 class GamingSessionTest extends TestWithMockery
 {

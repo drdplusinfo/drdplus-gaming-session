@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace DrdPlus\Tests\GamingSession;
 
@@ -22,19 +21,19 @@ class GamingSessionCategoryExperiencesTest extends TestCase
 
     /**
      * @test
-     * @expectedException \DrdPlus\GamingSession\Exceptions\ExperiencesTooLow
      */
     public function I_can_not_create_too_low_category_experiences(): void
     {
+        $this->expectException(\DrdPlus\GamingSession\Exceptions\ExperiencesTooLow::class);
         GamingSessionCategoryExperiences::getIt(-1);
     }
 
     /**
      * @test
-     * @expectedException \DrdPlus\GamingSession\Exceptions\ExperiencesTooHigh
      */
     public function I_can_not_create_too_high_category_experiences(): void
     {
+        $this->expectException(\DrdPlus\GamingSession\Exceptions\ExperiencesTooHigh::class);
         GamingSessionCategoryExperiences::getIt(4);
     }
 }
